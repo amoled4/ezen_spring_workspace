@@ -12,5 +12,15 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/springtest"></property>
+		<property name="username" value="springuser"></property>
+		<property name="password" value="mysql"></property>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+	</bean>
+	<mybatis-spring:scan base-package="com.myweb.www.repository"/>
 </beans>

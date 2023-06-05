@@ -1,0 +1,22 @@
+package com.myweb.www.controller;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myweb.www.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequestMapping("/member/*")
+@Controller
+public class UserController {
+	// private static final Logger log = LoggerFactory.getLogger(UserController.class);  // @Slf4j와 같은 의미
+	@Inject    // serviceImpl과 연결
+	private UserService usv;
+	
+}
