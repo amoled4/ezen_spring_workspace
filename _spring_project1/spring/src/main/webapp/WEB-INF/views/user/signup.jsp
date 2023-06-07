@@ -38,7 +38,7 @@
 			</tr>
 		</table>
 		<button type="submit">가입완료</button>
-		<button type="button">취소</button>
+		<a href="/"><button type="button">취소</button></a>
 	</form>
 </body>
 </html>

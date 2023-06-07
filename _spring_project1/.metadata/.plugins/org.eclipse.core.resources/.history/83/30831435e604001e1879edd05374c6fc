@@ -1,0 +1,39 @@
+package com.myweb.www.controller;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myweb.www.domain.BoardVO;
+import com.myweb.www.service.BoardService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RequestMapping("/board/*")
+@Slf4j
+@Controller
+public class BoardController {
+	@Inject
+	private BoardService bsv;
+	
+	@GetMapping("/list")
+	public String list(Model m) {
+		return "/board/list";
+	}
+	
+	@GetMapping("/register")
+	public String register(Model m) {
+		return "/board/register";
+	}
+	
+	public String registerPost(Model m, BoardVO bvo) {
+		int isOk = bsv.register(bvo);
+		if(isOk>0) {
+			m.addAttribute("msg_register",1);
+		}
+		return "/board/list";
+	}
+}

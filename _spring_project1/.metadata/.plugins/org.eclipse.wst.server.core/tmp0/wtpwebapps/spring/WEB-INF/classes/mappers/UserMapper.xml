@@ -11,4 +11,8 @@
   	insert into user(id, pw, name, email, home, age)
   	values (#{id}, #{pw}, #{name}, #{email}, #{home}, #{age})
   </insert>
+  
+  <select id="login" resultType="com.myweb.www.domain.UserVO">
+  	select * from user id=#{id} and pw=#{pw}
+  </select>
 </mapper>

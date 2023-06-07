@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글 수정</title>
+</head>
+<body>
+	<form action="/board/modify" method="post">
+		<table>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="title" value="${bvo.title }"></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" name="writer" value="${bvo.writer }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>조회수</th>
+				<td><input type="text" name="writer" value="${bvo.read_count }"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea rows="10" cols="30">${bvo.context }</textarea>
+				</td>
+			</tr>
+		</table>
+
+		<button>수정완료</button>
+		<a href="/board/remove?bno=${bvo.bno }"><button type="button">삭제</button></a>
+		<a href="/board/list"><button type="button">취소</button></a>
+	</form>
+</body>
+</html>

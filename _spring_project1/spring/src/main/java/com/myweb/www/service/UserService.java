@@ -6,4 +6,6 @@ public interface UserService {
 
 	int signUp(UserVO uvo);
 
+	UserVO login(String id, String pw);
+
 }
