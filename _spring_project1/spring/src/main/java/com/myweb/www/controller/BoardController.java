@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.domain.UserVO;
+import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +30,15 @@ public class BoardController {
 	// insert, update, delete => redirect 처리
 	//RedirectAttributes 객체 사용 : 데이터의 새로고침
 	
-	@GetMapping("list")
-	public String list(Model m, BoardVO bvo) {
-		List<BoardVO> list = bsv.list(bvo);
+	@GetMapping("/list")
+	public String list(Model m, PagingVO pvo) {
+//		log.info(">>> pageno : "+pvo.getPageNo());
+		log.info(pvo.toString());
+		List<BoardVO> list = bsv.list(pvo);
 		m.addAttribute("list", list);
+		int totalCount = bsv.getTotalCount();
+		PagingHandler ph = new PagingHandler(pvo, totalCount);
+		m.addAttribute("ph", ph);
 		return "/board/list";
 	}
 	
@@ -48,7 +56,6 @@ public class BoardController {
 	}
 	
 	// detail을 가져와야 하는 케이스 : detail, modify
-	
 	@GetMapping({"/detail","/modify"})
 	public void detail(@RequestParam("bno")int bno, Model m) {
 		log.info(">>> bno "+bno);

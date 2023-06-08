@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.PagingVO;
 import com.myweb.www.repository.BoardDAO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +27,10 @@ public class BoardServiceImpe implements BoardService {
 		return isOk;
 	}
 
-	@Override
-	public List<BoardVO> list(BoardVO bvo) {
-		log.info(">>> list service in");
-		return bdao.selectList(bvo);
-	}
+	/*
+	 * @Override public List<BoardVO> list(PagingVO pvo) {
+	 * log.info(">>> list service in"); return bdao.selectList(pvo); }
+	 */
 
 	@Override
 	public BoardVO detail(int bno) {
@@ -51,6 +51,18 @@ public class BoardServiceImpe implements BoardService {
 		log.info(">>> remove service in");
 		int isOk = bdao.delete(bno);
 		return isOk;
+	}
+
+	@Override
+	public List<BoardVO> list(PagingVO pvo) {
+		
+		return bdao.selectBoardListPaging(pvo);
+	}
+
+	@Override
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		return bdao.getTotalCount();
 	}
 	
 	
