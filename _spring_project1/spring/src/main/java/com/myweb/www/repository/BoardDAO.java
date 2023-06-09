@@ -19,7 +19,7 @@ public interface BoardDAO {
 
 	int readcount(int bno);
 
-	int getTotalCount();
+	int getTotalCount(PagingVO pvo);
 
 	List<BoardVO> selectBoardListPaging(PagingVO pvo);
 

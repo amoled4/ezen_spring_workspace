@@ -36,7 +36,7 @@ public class BoardController {
 		log.info(pvo.toString());
 		List<BoardVO> list = bsv.list(pvo);
 		m.addAttribute("list", list);
-		int totalCount = bsv.getTotalCount();
+		int totalCount = bsv.getTotalCount(pvo);
 		PagingHandler ph = new PagingHandler(pvo, totalCount);
 		m.addAttribute("ph", ph);
 		return "/board/list";

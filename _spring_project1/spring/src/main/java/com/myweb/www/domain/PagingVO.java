@@ -14,6 +14,9 @@ public class PagingVO {
 	private String type;
 	private String keyword;
 	
+	// 검색
+	// 여러 가지 타입을 같이 검색하기 위해서 타입을 배열로 구분(t+c,t+w 등)
+	// 한 가지만 검색하려면 배열 필요없음
 	public String[] getTypeToArray() {
 		return this.type == null ? new String[] {} : this.type.split("");
 	}

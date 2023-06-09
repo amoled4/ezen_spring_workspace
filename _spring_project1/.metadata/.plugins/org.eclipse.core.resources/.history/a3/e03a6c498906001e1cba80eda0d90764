@@ -1,0 +1,26 @@
+package com.myweb.www.controller;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myweb.www.domain.CommentVO;
+import com.myweb.www.service.CommentService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RequestMapping("/comment/*")
+@Slf4j
+@Controller
+public class CommentController {
+	@Inject
+	private CommentService csv;
+	private int isOk;
+	
+	@PostMapping("/post")
+	public String post(CommentVO cvo) {
+		return "";
+	}
+}

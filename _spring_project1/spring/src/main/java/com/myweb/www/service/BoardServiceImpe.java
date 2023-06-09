@@ -60,9 +60,9 @@ public class BoardServiceImpe implements BoardService {
 	}
 
 	@Override
-	public int getTotalCount() {
+	public int getTotalCount(PagingVO pvo) {
 		// TODO Auto-generated method stub
-		return bdao.getTotalCount();
+		return bdao.getTotalCount(pvo);
 	}
 	
 	

@@ -30,6 +30,15 @@ title varchar(200),
 context text,
 writer varchar(100),
 reg_date datetime default now(),
-read_count int,
+read_count int default 0,
 isDel varchar(50) default "n",
 primary key(bno));
+
+--2023-06-09
+create table comment(
+cno int not null auto_increment,
+bno int not null,
+writer varchar(100) not null,
+content text not null,
+reg_date datetime default now(),
+Primary key(cno));

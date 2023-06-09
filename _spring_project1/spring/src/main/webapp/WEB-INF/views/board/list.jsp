@@ -62,6 +62,7 @@
 			<input type="hidden" name="qty" value="${ph.pgvo.qty }">
 			<button type="submit">검색</button>
 			<a href="/board/list?pageNo=1&type=w&keyword=${ses.id }"><button type="button">내가쓴글</button></a>
+			<span>게시물 총 ${ph.totalCount }개</span>
 	</form>
 </body>
 </html>

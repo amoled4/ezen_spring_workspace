@@ -47,6 +47,7 @@
 	<select id="getTotalCount" resultType="int">
 		select count(bno) from
 		board where isDel="n"
+		<include refid="search"></include>
 	</select>
 
 	<sql id="search">
@@ -62,7 +63,7 @@
 								writer like concat('%', #{keyword}, '%')
 							</when>
 							<when test="type == 'c'.toString()">
-								content like concat('%', #{keyword}, '%')
+								context like concat('%', #{keyword}, '%')
 							</when>
 						</choose>
 					</trim>
