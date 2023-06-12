@@ -57,5 +57,8 @@
 		console.log("bno : "+bnoVal);
 	</script>
 	<script type="text/javascript" src="/resources/js/boardComment.js"></script>
+	<script type="text/javascript">
+		getCommentList(bnoVal);
+	</script>
 </body>
 </html>

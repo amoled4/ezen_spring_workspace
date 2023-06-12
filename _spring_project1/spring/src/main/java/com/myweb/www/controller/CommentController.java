@@ -1,11 +1,16 @@
 package com.myweb.www.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +38,29 @@ public class CommentController {
 		log.info(">>> 댓글 등록 > "+(isOk>0?"성공":"실패"));
 		
 		// 리턴을 위해서는 response의 통신상태를 같이 리턴해야 함
+		return isOk>0? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@GetMapping(value="/{bno}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<CommentVO>> getList(@PathVariable("bno")int bno){
+		log.info(">>> comment List bno : "+bno);
+		// DB 요청
+		List<CommentVO> list = csv.list(bno);
+		return new ResponseEntity<List<CommentVO>>(list, HttpStatus.OK);
+//		return new ResponseEntity<List<CommentVO>>(csv.list(bno), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value="/{cno}", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> remove(@PathVariable("cno")int cno){
+		isOk = csv.remove(cno);
+		return isOk>0? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@PostMapping(value="/modify", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> modify(@RequestBody CommentVO cvo, @PathVariable("cno")int cno){
+		isOk = csv.modify(cvo);
+		log.info(">>> 댓글 수정 > "+(isOk>0?"성공":"실패"));
+		
 		return isOk>0? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

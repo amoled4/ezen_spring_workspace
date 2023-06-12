@@ -7,4 +7,16 @@
 		insert into comment (bno, writer, content)
 		values (#{bno}, #{writer}, #{content})
 	</insert>
+	
+	<select id="list" resultType="com.myweb.www.domain.CommentVO">
+		select * from comment where bno = #{bno}
+	</select>
+	
+	<delete id="delete">
+		delete from comment where cno = #{cno}
+	</delete>
+	
+	<update id="update">
+		update comment set content=#{content} where cno = #{cno}
+	</update>
 </mapper>
