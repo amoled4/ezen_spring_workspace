@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -56,11 +57,11 @@ public class CommentController {
 		return isOk>0? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@PostMapping(value="/modify", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> modify(@RequestBody CommentVO cvo, @PathVariable("cno")int cno){
+	@PutMapping(value="/modify", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> modify(@RequestBody CommentVO cvo){
+		log.info("cvo : " + cvo.toString());
 		isOk = csv.modify(cvo);
 		log.info(">>> 댓글 수정 > "+(isOk>0?"성공":"실패"));
-		
 		return isOk>0? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

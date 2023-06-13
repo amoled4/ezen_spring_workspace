@@ -1,0 +1,44 @@
+--2023-06-01
+--- root 접속
+create database springtest;
+
+--- user 생성
+create user 'springuser'@'localhost' identified by 'mysql';
+grant all privileges on springtest.* to 'springuser'@'localhost' with grant option;
+flush privileges;
+
+--- user 변경 접속
+mysql -uspringuser -pmysql
+
+---user table
+id, pw, name, email, home, age, red_date
+
+create table user(
+id varchar(100) not null,
+pw varchar(100) not null,
+name varchar(100),
+email varchar(100),
+home varchar(100),
+age int,
+reg_date datetime default now(),
+Primary key(id));
+
+--2023-06-07
+create table board(
+bno int not null auto_increment,
+title varchar(200),
+context text,
+writer varchar(100),
+reg_date datetime default now(),
+read_count int default 0,
+isDel varchar(50) default "n",
+primary key(bno));
+
+--2023-06-09
+create table comment(
+cno int not null auto_increment,
+bno int not null,
+writer varchar(100) not null,
+content text not null,
+reg_date datetime default now(),
+Primary key(cno));
