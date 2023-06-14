@@ -2,6 +2,7 @@ package com.myweb.www.service;
 
 import java.util.List;
 
+import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.PagingVO;
 
@@ -18,5 +19,10 @@ public interface BoardService {
 	int remove(int bno);
 
 	int getTotalCount(PagingVO pvo);
+
+	// bvo, fList 묶어서 처리되는 case
+	int register(BoardDTO bdto);
+
+	BoardDTO detailFile(int bno);
 
 }

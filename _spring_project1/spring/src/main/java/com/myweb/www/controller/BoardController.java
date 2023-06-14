@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.domain.UserVO;
+import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BoardService;
 
@@ -26,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Inject
 	private BoardService bsv;
+	@Inject
+	private FileHandler fhd;
 	
 	// insert, update, delete => redirect 처리
 	//RedirectAttributes 객체 사용 : 데이터의 새로고침
@@ -47,11 +53,25 @@ public class BoardController {
 		return "/board/register";
 	}
 	
+	// required(필수 여부) : false인 경우 해당 파라미터가 없더라도 예외가 발생하지 않음
 	@PostMapping("/register")
-	public String registerPost(RedirectAttributes rAttr, BoardVO bvo) {
+	public String registerPost(RedirectAttributes rAttr, BoardVO bvo, @RequestParam(name="files", required = false)MultipartFile[] files) {
 		log.info(">>> bvo "+bvo.toString());
-		int isOk = bsv.register(bvo);
+		log.info("files : "+files.toString());
+		List<FileVO> fList = null;
+		// file 처리 => Handler로 처리
+		if(files[0].getSize()>0) {   // 데이터가 있다라는 것을 의미
+			// 파일 배열을 경로설정, fvo set 해서 리스트로 리턴
+			fList = fhd.uploadFiles(files);   // fvo의 리스트를 넣어줌
+		}else {
+			log.info("file null");
+		}
+		// 파일과 board 처리를 별도로 할 것인지 같이 묶어서 처리를 할 것인지 결정 -> 일반적으로 묶어서 처리
+		BoardDTO bdto = new BoardDTO(bvo, fList);
+		int isOk = bsv.register(bdto);
+		// int isOk = bsv.register(bvo);
 		log.info(">> 글 작성 > "+(isOk>0?"성공":"실패"));
+		rAttr.addFlashAttribute("isOk",isOk);
 		return "redirect:/board/list";
 	}
 	
@@ -59,8 +79,9 @@ public class BoardController {
 	@GetMapping({"/detail","/modify"})
 	public void detail(@RequestParam("bno")int bno, Model m) {
 		log.info(">>> bno "+bno);
-		BoardVO bvo = bsv.detail(bno);
-		m.addAttribute("board", bvo);
+//		BoardVO bvo = bsv.detail(bno);
+		BoardDTO bdto = bsv.detailFile(bno);
+		m.addAttribute("boardDTO", bdto);
 	}
 	
 	@PostMapping("/modify")

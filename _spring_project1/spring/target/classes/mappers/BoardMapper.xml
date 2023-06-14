@@ -49,6 +49,10 @@
 		board where isDel="n"
 		<include refid="search"></include>
 	</select>
+	
+	<select id="selectBno" resultType="int">
+		select max(bno) from board
+	</select>
 
 	<sql id="search">
 		<if test="type != null">

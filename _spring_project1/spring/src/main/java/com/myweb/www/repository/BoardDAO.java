@@ -23,4 +23,6 @@ public interface BoardDAO {
 
 	List<BoardVO> selectBoardListPaging(PagingVO pvo);
 
+	int selectBno();
+
 }

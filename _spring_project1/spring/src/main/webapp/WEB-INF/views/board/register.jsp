@@ -26,7 +26,7 @@
 		<!-- trigger를 클릭하면 input file이 클릭되게끔 -->
 			<th>파일첨부</th>
 			<td>
-			<input type="file" id="file" name="file" multiple>
+			<input type="file" id="file" name="files" multiple style="display:none">
 			<button type="button" id="trigger">찾아보기</button><br>
 			<div id="fileZone">
 				
@@ -34,7 +34,7 @@
 			</td>
 		</tr>
 	</table>
-	<button>작성완료</button>
+	<button id="regBtn">작성완료</button>
 	<a href="/board/list"><button type="button">취소</button></a>
 	</form>
 	<script type="text/javascript" src="/resources/js/boardRegister.js"></script>

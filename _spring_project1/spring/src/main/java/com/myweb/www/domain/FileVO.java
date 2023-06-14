@@ -18,6 +18,6 @@ public class FileVO {
 	private String file_name;
 	private int file_type;
 	private int bno;
-	private int file_size;
+	private long file_size;
 	private String reg_date;
 }
