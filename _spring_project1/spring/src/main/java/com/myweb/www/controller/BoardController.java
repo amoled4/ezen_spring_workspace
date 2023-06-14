@@ -58,16 +58,16 @@ public class BoardController {
 	public String registerPost(RedirectAttributes rAttr, BoardVO bvo, @RequestParam(name="files", required = false)MultipartFile[] files) {
 		log.info(">>> bvo "+bvo.toString());
 		log.info("files : "+files.toString());
-		List<FileVO> fList = null;
-		// file 처리 => Handler로 처리
+		List<FileVO> flist = null;
+		// file 처리 => Handler로 처리  //multiple이라 배열
 		if(files[0].getSize()>0) {   // 데이터가 있다라는 것을 의미
 			// 파일 배열을 경로설정, fvo set 해서 리스트로 리턴
-			fList = fhd.uploadFiles(files);   // fvo의 리스트를 넣어줌
+			flist = fhd.uploadFiles(files);   // fvo의 리스트를 넣어줌
 		}else {
 			log.info("file null");
 		}
 		// 파일과 board 처리를 별도로 할 것인지 같이 묶어서 처리를 할 것인지 결정 -> 일반적으로 묶어서 처리
-		BoardDTO bdto = new BoardDTO(bvo, fList);
+		BoardDTO bdto = new BoardDTO(bvo, flist);
 		int isOk = bsv.register(bdto);
 		// int isOk = bsv.register(bvo);
 		log.info(">> 글 작성 > "+(isOk>0?"성공":"실패"));

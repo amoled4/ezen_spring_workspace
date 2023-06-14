@@ -40,7 +40,7 @@ public class FileHandler {
 		}
 		
 		// 경로 설정
-		List<FileVO> fList = new ArrayList<FileVO>();
+		List<FileVO> flist = new ArrayList<FileVO>();
 		for(MultipartFile file : files) {
 			FileVO fvo = new FileVO();
 			fvo.setSave_dir(today);            // 파일 경로 설정
@@ -74,9 +74,9 @@ public class FileHandler {
 				log.info(">>> 파일 생성 오류");
 				e.printStackTrace();
 			}
-			fList.add(fvo);
+			flist.add(fvo);
 		}
-		return fList;
+		return flist;
 	}
 	// tika를 사용하여 파일 형식 체크 -> 이미지 파일이 맞는지 체크
 	private boolean isImageFile(File storeFile) throws IOException {

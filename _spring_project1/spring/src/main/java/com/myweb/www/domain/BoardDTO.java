@@ -15,5 +15,5 @@ import lombok.ToString;
 @Getter
 public class BoardDTO {
 	private BoardVO bvo;
-	private List<FileVO> fList;
+	private List<FileVO> flist;
 }

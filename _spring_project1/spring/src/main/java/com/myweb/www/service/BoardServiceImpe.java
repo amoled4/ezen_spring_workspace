@@ -73,19 +73,19 @@ public class BoardServiceImpe implements BoardService {
 //	-------------------파일 처리 라인----------------
 	@Override
 	public int register(BoardDTO bdto) {
-		log.info("bvo+fList register in");
+		log.info("bvo+flist register in");
 		// 기존 게시글에 대한 내용 DB 저장하는 것 다시 호출
 		int isOk = bdao.insertRegi(bdto.getBvo());
-		if(bdto.getFList() == null) {   // 파일이 없다라는 뜻
+		if(bdto.getFlist() == null) {   // 파일이 없다라는 뜻
 			isOk*=1;   // 파일이 없어도 성공한 걸로 치고 글작성
 		}else {
 			// bvo가 DB에 들어가고, 파일 개수가 있다면...
-			if(isOk>0 && bdto.getFList().size()>0) {
+			if(isOk>0 && bdto.getFlist().size()>0) {
 				// register는 등록시 bno가 결정되어있지 않음
 //				int bno = bdto.getBvo().getBno();    // update 때는 가능
 				int bno = bdao.selectBno();   // 방금 저장된 bvo의 bno 리턴받기
 				// fList의 모든 file의 bno를 방금 받은 bno로 set
-				for(FileVO fvo : bdto.getFList()) {
+				for(FileVO fvo : bdto.getFlist()) {
 					fvo.setBno(bno);
 					log.info(">>>> insert File : "+fvo.toString());
 					isOk *= fdao.insertFile(fvo);
@@ -101,7 +101,7 @@ public class BoardServiceImpe implements BoardService {
 		int isOk = bdao.readcount(bno);
 		BoardDTO bdto = new BoardDTO();
 		bdto.setBvo(bdao.selectOne(bno));        // bvo 호출
-		bdto.setFList(fdao.getFileList(bno));    // fList 호출
+		bdto.setFlist(fdao.getFileList(bno));    // fList 호출
 		return bdto;
 	}
 	

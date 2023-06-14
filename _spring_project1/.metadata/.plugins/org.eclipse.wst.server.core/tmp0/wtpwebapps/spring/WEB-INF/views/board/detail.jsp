@@ -27,9 +27,9 @@
 			<th>내용</th>
 			<td>
 			<!-- file 표현 영역  -->
-			<c:set var="fList" value="${boardDTO.fList }"></c:set>
+			<c:set var="flist" value="${boardDTO.flist }"></c:set>
 			<ul>
-				<c:forEach items="${fList }" var="fvo">
+				<c:forEach items="${flist }" var="fvo">
 					<li>
 						<c:choose>
 							<c:when test="${fvo.file_type > 0 }">

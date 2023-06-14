@@ -7,7 +7,7 @@
 <title>글 수정</title>
 </head>
 <body>
-	<form action="/board/modify" method="post">
+	<form action="/board/modify" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>번호</th>
