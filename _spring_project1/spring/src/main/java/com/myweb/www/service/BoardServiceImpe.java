@@ -12,6 +12,7 @@ import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
+import com.myweb.www.domain.UserVO;
 import com.myweb.www.repository.BoardDAO;
 import com.myweb.www.repository.FileDAO;
 
@@ -98,11 +99,47 @@ public class BoardServiceImpe implements BoardService {
 	@Override
 	public BoardDTO detailFile(int bno) {
 		log.info(">>> detail File in");
-		int isOk = bdao.readcount(bno);
+		
 		BoardDTO bdto = new BoardDTO();
 		bdto.setBvo(bdao.selectOne(bno));        // bvo 호출
 		bdto.setFlist(fdao.getFileList(bno));    // fList 호출
 		return bdto;
+	}
+
+	@Override
+	public int readcount(int bno) {
+		int isOk = bdao.readcount(bno);
+		return isOk;
+	}
+
+	@Override
+	public int removeFile(String uuid) {
+		log.info(">>> file remove in");
+		return fdao.deleteFile(uuid);
+	}
+
+	@Override
+	public int modifyFile(BoardDTO bdto) {
+		BoardVO tmpBoard = bdao.selectOne(bdto.getBvo().getBno());
+//		if(user == null || !user.getId().equals(tmpBoard.getWriter())) {
+//			return 0;
+//		}
+		int isOk = bdao.updateMod(bdto.getBvo());   // 기존 보드 내용 update
+		if(bdto.getFlist() == null) {
+			isOk *= 1;
+		}else {
+			if(isOk>0 && bdto.getFlist().size()>0) {
+				int bno = bdto.getBvo().getBno();
+				// fList의 모든 file의 bno를 방금 받은 bno로 set
+				for(FileVO fvo : bdto.getFlist()) {
+					fvo.setBno(bno);
+					log.info(">>>> insert File : "+fvo.toString());
+					isOk *= fdao.insertFile(fvo);     // 추가한 파일 추가
+					// 삭제는 별도로
+				}
+			}
+		}
+		return isOk;
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.PagingVO;
+import com.myweb.www.domain.UserVO;
 
 public interface BoardService {
 
@@ -24,5 +25,11 @@ public interface BoardService {
 	int register(BoardDTO bdto);
 
 	BoardDTO detailFile(int bno);
+
+	int readcount(int bno);
+
+	int removeFile(String uuid);
+
+	int modifyFile(BoardDTO bdto);
 
 }

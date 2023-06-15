@@ -1,0 +1,121 @@
+package com.myweb.www.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.myweb.www.domain.BoardDTO;
+import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.FileVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.repository.BoardDAO;
+import com.myweb.www.repository.FileDAO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class BoardServiceImpe implements BoardService {
+	@Inject
+	private BoardDAO bdao;
+	@Inject
+	private FileDAO fdao;
+
+	@Override
+	public int register(BoardVO bvo) {
+		log.info(">>> register service in");
+		int isOk = bdao.insertRegi(bvo);
+		return isOk;
+	}
+
+	/*
+	 * @Override public List<BoardVO> list(PagingVO pvo) {
+	 * log.info(">>> list service in"); return bdao.selectList(pvo); }
+	 */
+
+	@Override
+	public BoardVO detail(int bno) {
+		log.info(">>> detail service in");
+		int isOk = bdao.readcount(bno);
+		return bdao.selectOne(bno);
+	}
+
+	@Override
+	public int modify(BoardVO bvo) {
+		log.info(">>> modify service in");
+		int isOk = bdao.updateMod(bvo);
+		return isOk;
+	}
+
+	@Override
+	public int remove(int bno) {
+		log.info(">>> remove service in");
+		int isOk = bdao.delete(bno);
+		return isOk;
+	}
+
+	@Override
+	public List<BoardVO> list(PagingVO pvo) {
+		
+		return bdao.selectBoardListPaging(pvo);
+	}
+
+	@Override
+	public int getTotalCount(PagingVO pvo) {
+		// TODO Auto-generated method stub
+		return bdao.getTotalCount(pvo);
+	}
+
+//	-------------------파일 처리 라인----------------
+	@Override
+	public int register(BoardDTO bdto) {
+		log.info("bvo+flist register in");
+		// 기존 게시글에 대한 내용 DB 저장하는 것 다시 호출
+		int isOk = bdao.insertRegi(bdto.getBvo());
+		if(bdto.getFlist() == null) {   // 파일이 없다라는 뜻
+			isOk*=1;   // 파일이 없어도 성공한 걸로 치고 글작성
+		}else {
+			// bvo가 DB에 들어가고, 파일 개수가 있다면...
+			if(isOk>0 && bdto.getFlist().size()>0) {
+				// register는 등록시 bno가 결정되어있지 않음
+//				int bno = bdto.getBvo().getBno();    // update 때는 가능
+				int bno = bdao.selectBno();   // 방금 저장된 bvo의 bno 리턴받기
+				// fList의 모든 file의 bno를 방금 받은 bno로 set
+				for(FileVO fvo : bdto.getFlist()) {
+					fvo.setBno(bno);
+					log.info(">>>> insert File : "+fvo.toString());
+					isOk *= fdao.insertFile(fvo);
+				}
+			}
+		}
+		return isOk;
+	}
+
+	@Override
+	public BoardDTO detailFile(int bno) {
+		log.info(">>> detail File in");
+		
+		BoardDTO bdto = new BoardDTO();
+		bdto.setBvo(bdao.selectOne(bno));        // bvo 호출
+		bdto.setFlist(fdao.getFileList(bno));    // fList 호출
+		return bdto;
+	}
+
+	@Override
+	public int readcount(int bno) {
+		int isOk = bdao.readcount(bno);
+		return isOk;
+	}
+
+	@Override
+	public int removeFile(String uuid) {
+		log.info(">>> file remove in");
+		return fdao.deleteFile(uuid);
+	}
+	
+	
+}
