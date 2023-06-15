@@ -45,7 +45,7 @@
 							<li>
 								<c:choose>
 									<c:when test="${fvo.file_type > 0 }">
-										<img alt="없음" src="/upload/${fn:replace(fvo.save_dir,'\\', '/') }/${fvo.uuid}_${fvo.file_name}">
+										<img alt="없음" src="/upload/${fn:replace(fvo.save_dir,'\\', '/') }/${fvo.uuid}_th_${fvo.file_name}">
 										<button type="button" data-uuid="${fvo.uuid }" class="file-x">X</button>
 									</c:when>
 									<c:otherwise>
