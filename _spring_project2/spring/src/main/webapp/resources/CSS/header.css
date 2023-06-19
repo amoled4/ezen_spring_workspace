@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'hanna';
+    src: url('/resources/font/BMHANNAPro.ttf') format('truetype');
+}
+
+#box{
+	font-family: 'hanna';
+}
+.material-symbols-outlined{
+	font-size: 30px;
+}
+#mainText{
+	font-size: 40px;
+}
+
+#box{
+	position: relative;
+	width: 100%;
+	height: 150px;
+	margin-top: 30px;
+}
+
+#left{
+	float: left;
+}
+
+#left>a{
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+}
+
+#right{
+	float: right;
+	
+}
+
+.headerBtn{
+	border: none;
+	border-radius: 24px;
+	background: white;
+	color: rgb(42, 193, 188);
+	font-family: 'hanna';
+	font-size: 18px;
+	cursor: pointer;
+	width: 80px;
+	height: 30px;
+	margin-right: 10px;
+	
+	
+}

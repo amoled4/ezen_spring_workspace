@@ -3399,3 +3399,6 @@ Caused by: java.nio.file.NoSuchFileException: C:\Users\김경아\.m2\repository\
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2023-06-16 09:15:01.952
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.core.resources 2 10035 2023-06-16 12:43:59.579
+!MESSAGE The workspace will exit with unsaved changes in this session.
