@@ -11,6 +11,8 @@
 <link href="${path }/resources/CSS/all.css" rel="stylesheet"/>
 <link href="${path }/resources/CSS/home.css" rel="stylesheet"/>
 <link href="${path }/resources/CSS/footer.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/login.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/register.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -28,7 +30,7 @@ volume_up
 <a href="/member/signup"><button type="button" class="headerBtn">회원가입</button></a>
 </c:if>
 <c:if test="${ses.id != null }">
-<a href="/member/logout"><button type="button">로그아웃</button></a>
+<a href="/member/logout"><button type="button" class="headerBtn">로그아웃</button></a>
 </c:if>
 </div>
 </div>

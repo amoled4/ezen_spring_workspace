@@ -4,6 +4,7 @@
 <%@ page session="false" %>
 <jsp:include page="./layout/header.jsp"></jsp:include>
 <div id="wrapper">
+<div id="">
 <div id="span1">
 찾아가던 <br>
 친구를 <br>
@@ -19,8 +20,9 @@
 서울 전지역, 경기 및 광역시 일부 지역에서 <br>
 서비스 이용 가능! <br>
 </div>
+
 <br>
 <a href="/board/list"><button type="button" class="boardEnter">수다의 민족으로 빠져들기 ></button></a>
-
+</div>
 </div>
 <jsp:include page="./layout/footer.jsp"></jsp:include>

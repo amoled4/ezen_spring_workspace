@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../layout/header.jsp"></jsp:include>
+<div id="regi-wrap">
 <form action="/board/register" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
@@ -29,4 +30,5 @@
 	<button id="regBtn">작성완료</button>
 	<a href="/board/list"><button type="button">취소</button></a>
 	</form>
+</div>
 <jsp:include page="../layout/footer.jsp"></jsp:include>

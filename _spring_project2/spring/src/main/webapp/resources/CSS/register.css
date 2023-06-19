@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#regi-wrap{
+	width: 500px;
+	height: 1000px;
+	background-color: whitesmoke;
+	margin: 10% auto;
+	border-radius: 10px;
+	text-align: center;
+}

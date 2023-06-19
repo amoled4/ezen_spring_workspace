@@ -2,11 +2,15 @@
 
 
 #wrapper{
-	height: auto;
+  	height: auto;
   	min-height: 100%;
-	padding-bottom: 200px;
+  	padding-bottom: 150px;
 	padding-left: 35px;
 	
+}
+
+#home-wrap{
+	min-height: 600px;
 }
 
 .boardEnter{
