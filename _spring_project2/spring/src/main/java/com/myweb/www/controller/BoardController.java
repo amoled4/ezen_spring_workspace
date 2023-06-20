@@ -24,6 +24,7 @@ import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.FileHandler;
+import com.myweb.www.handler.FileSweeper;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BoardService;
 
@@ -37,6 +38,8 @@ public class BoardController {
 	private BoardService bsv;
 	@Inject
 	private FileHandler fhd;
+	@Inject
+	private FileSweeper fs;
 	
 	@GetMapping("/list")
 	public String list(PagingVO pvo, Model m) {
@@ -100,9 +103,16 @@ public class BoardController {
 	}
 	
 	@DeleteMapping(value="/file/{uuid}", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid){
+	public ResponseEntity<String> removeFile(@PathVariable("uuid")String uuid) throws Exception{
 		log.info(">>> uuid : "+uuid);
-		return bsv.removeFile(uuid) > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		int isOk = bsv.removeFile(uuid);
+		
+		if(isOk>0) {
+			fs.fileSweeper();
+			return new ResponseEntity<String>("1", HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 }

@@ -15,4 +15,8 @@
 	<delete id="deleteFile">
 		delete from file where uuid=#{uuid}
 	</delete>
+	
+	<select id="getFileAllList" resultType="com.myweb.www.domain.FileVO">
+		select * from file
+	</select>
 </mapper>
