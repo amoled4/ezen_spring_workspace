@@ -14,4 +14,14 @@ public interface BoardService {
 
 	int register(BoardDTO bdto);
 
+	int readcount(int bno);
+
+	BoardDTO detailFile(int bno);
+
+	int modifyFile(BoardDTO bdto);
+
+	int remove(int bno);
+
+	int removeFile(String uuid);
+
 }

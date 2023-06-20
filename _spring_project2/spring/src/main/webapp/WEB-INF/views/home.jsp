@@ -4,7 +4,6 @@
 <%@ page session="false" %>
 <jsp:include page="./layout/header.jsp"></jsp:include>
 <div id="wrapper">
-<div id="">
 <div id="span1">
 찾아가던 <br>
 친구를 <br>
@@ -22,7 +21,11 @@
 </div>
 
 <br>
-<a href="/board/list"><button type="button" class="boardEnter">수다의 민족으로 빠져들기 ></button></a>
-</div>
+<c:if test="${login.id != null }">
+	<a href="/board/list"><button type="button" class="boardEnter">수다의 민족으로 빠져들기 ></button></a>
+</c:if>
+<c:if test="${login.id == null }">
+	<a href="/member/login"><button type="button" class="boardEnter">로그인 후 빠져들기 ></button></a>
+</c:if>
 </div>
 <jsp:include page="./layout/footer.jsp"></jsp:include>

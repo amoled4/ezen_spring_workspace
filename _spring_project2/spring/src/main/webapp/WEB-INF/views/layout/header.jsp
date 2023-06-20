@@ -13,6 +13,11 @@
 <link href="${path }/resources/CSS/footer.css" rel="stylesheet"/>
 <link href="${path }/resources/CSS/login.css" rel="stylesheet"/>
 <link href="${path }/resources/CSS/register.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/signup.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/list.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/signupCompl.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/detail.css" rel="stylesheet"/>
+<link href="${path }/resources/CSS/modify.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -30,6 +35,7 @@ volume_up
 <a href="/member/signup"><button type="button" class="headerBtn">회원가입</button></a>
 </c:if>
 <c:if test="${ses.id != null }">
+<span>${ses.name }(${ses.id }) 님 환영합니다.</span>
 <a href="/member/logout"><button type="button" class="headerBtn">로그아웃</button></a>
 </c:if>
 </div>

@@ -1,5 +1,6 @@
 package com.myweb.www.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardServiceImpl implements BoardService {
 	@Inject
 	private BoardDAO bdao;
-	
+	@Inject
 	private FileDAO fdao;
 
 	@Override
@@ -50,5 +51,50 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		return isOk;
+	}
+
+	@Override
+	public int readcount(int bno) {
+		int isOk = bdao.readcount(bno);
+		return isOk;
+	}
+
+	@Override
+	public BoardDTO detailFile(int bno) {
+		BoardDTO bdto = new BoardDTO();
+		bdto.setBvo(bdao.selectOne(bno));
+		bdto.setFlist(fdao.getFileList(bno));
+		
+		return bdto;
+	}
+
+	@Override
+	public int modifyFile(BoardDTO bdto) {
+		BoardVO tmpBoard = bdao.selectOne(bdto.getBvo().getBno());
+		int isOk = bdao.updateMod(bdto.getBvo());
+		if(bdto.getFlist() == null) {
+			isOk *= 1;
+		}else {
+			if(isOk>0 && bdto.getFlist().size()>0) {
+				int bno = bdto.getBvo().getBno();
+				for(FileVO fvo : bdto.getFlist()) {
+					fvo.setBno(bno);
+					isOk *= fdao.insertFile(fvo);
+				}
+			}
+		}
+		return isOk;
+	}
+
+	@Override
+	public int remove(int bno) {
+		int isOk = bdao.delete(bno);
+		return isOk;
+	}
+
+	@Override
+	public int removeFile(String uuid) {
+		// TODO Auto-generated method stub
+		return fdao.deleteFile(uuid);
 	}
 }

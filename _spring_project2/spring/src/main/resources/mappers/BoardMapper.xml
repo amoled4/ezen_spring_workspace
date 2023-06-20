@@ -7,6 +7,7 @@
 		select a.bno, title, writer, reg_date, read_count from (
 		select bno from board
 		where isDel ="n"
+		<include refid="search"></include>
 		order by bno desc
 		limit #{pageStart}, #{qty}) a left join board b
 		on a.bno = b.bno
@@ -14,6 +15,7 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(bno) from board where isDel="n"
+		<include refid="search"></include>
 	</select>
 	
 	<insert id="insertRegi">
@@ -24,4 +26,44 @@
 	<select id="selectBno" resultType="int">
 		select max(bno) from board
 	</select>
+	
+	<update id="readcount">
+		update board set read_count = read_count +1 where bno=#{bno}
+	</update>
+	
+	<select id="selectOne" resultType="com.myweb.www.domain.BoardVO">
+		select * from board where bno=#{bno}
+	</select>
+	
+	<update id="updateMod">
+		update board set title=#{title}, context=#{context}
+		where bno=#{bno}
+	</update>
+	
+	<update id="delete">
+		update board set isDel="y" where bno=#{bno}
+	</update>
+	
+	
+	<sql id="search">
+		<if test="type != null">
+			<trim prefix="and (" suffix=")" prefixOverrides="OR">
+				<foreach collection="typeToArray" item="type">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 't'.toString()">
+								title like concat('%', #{keyword}, '%')
+							</when>
+							<when test="type == 'w'.toString()">
+								writer like concat('%', #{keyword}, '%')
+							</when>
+							<when test="type == 'c'.toString()">
+								context like concat('%', #{keyword}, '%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql>
 </mapper>

@@ -1,34 +1,33 @@
 @charset "UTF-8";
 
-#login-wrap{
+#sign-wrap{
+	position: relative;
 	width: 450px;
-	height: 300px;
+	height: 500px;
+	margin: 0 auto;
 	background-color: whitesmoke;
-	margin: 10% auto;
 	border-radius: 10px;
 	text-align: center;
+	padding-top: 10px;
 }
 
-.input-login{
+.sign-input{
 	width: 350px;
     height: 50px;
-    margin: 30px 0 0 0;
+    margin: 10px 0 0 0;
     border: none;
     border-radius: 5px;
     font-size: 15px;
     padding-left: 10px;
 }
 
-#btn-wrap{
-	margin-top: 40px;
-}
-
-.login-btn{
+.sign-btn{
 	border: none;
 	border-radius: 5px;
-	width: 350px;
+	width: 150px;
 	height: 50px;
 	color: white;
     background-color: rgb(42, 193, 188);
+    margin-top: 20px;
     cursor: pointer;
 }

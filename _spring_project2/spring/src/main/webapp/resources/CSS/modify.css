@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#regi-wrap{
+#modify-wrap{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -8,7 +8,7 @@
 	text-align: center;
 }
 
-.regiBtn{
+.modify-btn{
 	border: none;
 	border-radius: 5px;
 	width: 70px;

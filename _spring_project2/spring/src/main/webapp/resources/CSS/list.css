@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#list-wrap{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+#list-table{
+	border-collapse: collapse;
+	width: 800px;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+.list-th{
+	color: white;
+	border-bottom: 2px solid white;
+	padding: 10px;
+}
+
+.list-td{
+	color: whitesmoke;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+}
+
+.list-regi{
+	border: none;
+	border-radius: 5px;
+	width: 70px;
+	height: 25px;
+	color: rgb(42, 193, 188);
+    background-color: white;
+    cursor: pointer;
+}
+
+a{
+	text-decoration: none;
+	color: whitesmoke;
+}

@@ -15,4 +15,12 @@ public interface BoardDAO {
 
 	int selectBno();
 
+	int readcount(int bno);
+
+	BoardVO selectOne(int bno);
+
+	int updateMod(BoardVO bvo);
+
+	int delete(int bno);
+
 }

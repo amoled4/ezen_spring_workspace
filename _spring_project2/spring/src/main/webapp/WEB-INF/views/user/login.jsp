@@ -9,7 +9,6 @@
 	</div>
 	<div id="btn-wrap">
 		<button class="login-btn">로그인</button>
-		<a href="/"><button type="button" class="login-btn">메인</button></a>
 	</div>	
 	</form>
 </div>

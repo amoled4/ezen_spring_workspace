@@ -33,6 +33,7 @@ public class UserController {
 		if(login != null) {
 			HttpSession ses = request.getSession();
 			ses.setAttribute("ses", login);
+			ses.setMaxInactiveInterval(60*10);
 			m.addAttribute("login", login);
 		}
 		return "home";

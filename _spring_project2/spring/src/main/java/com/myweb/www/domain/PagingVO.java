@@ -11,6 +11,13 @@ public class PagingVO {
 	private int pageNo;
 	private int qty;
 	
+	private String type;
+	private String keyword;
+	
+	public String[] getTypeToArray() {
+		return this.type == null ? new String[] {} : this.type.split("");
+	}
+	
 	public PagingVO() {
 		this(1,10);
 	}

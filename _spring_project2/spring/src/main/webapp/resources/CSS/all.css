@@ -3,4 +3,6 @@
 body{
 	background-color: rgb(42, 193, 188);
 	color: white;
+	margin: 0;
+	height: 100%;
 }
