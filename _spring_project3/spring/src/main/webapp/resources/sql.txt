@@ -1,0 +1,48 @@
+2023-06-21
+
+create database spirngmore
+
+create user 'springmember'@'localhost' identified by 'mysql'
+grant all privileges on springmember.* to 'springmember'@'localhost' with grant option;
+flush privileges;
+
+create table user(
+id varchar(100) not null,
+pw varchar(100) not null,
+name varchar(100),
+email varchar(100),
+home varchar(100),
+age int,
+reg_date datetime default now(),
+Primary key(id));
+
+
+create table board(
+bno int not null auto_increment,
+title varchar(200),
+context text,
+writer varchar(100),
+reg_date datetime default now(),
+read_count int default 0,
+isDel varchar(50) default "n",
+primary key(bno));
+
+
+create table comment(
+cno int not null auto_increment,
+bno int not null,
+writer varchar(100) not null,
+content text not null,
+reg_date datetime default now(),
+Primary key(cno));
+
+
+create table file(
+uuid varchar(256) not null,
+save_dir varchar(256) not null,
+file_name varchar(256) not null,
+file_type tinyint(1) default 0,
+bno int,
+file_size int,
+reg_date datetime default now(),
+Primary key(uuid));
