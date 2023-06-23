@@ -11,7 +11,6 @@
 	Hello world!  
 </h1>
 
-<a href="/board/register"><button type="button">글작성</button></a>
 <a href="/board/list"><button type="button">글목록</button></a>
 </body>
 </html>

@@ -1,0 +1,9 @@
+package com.myweb.www.service;
+
+import com.myweb.www.domain.BCommentVO;
+
+public interface BCommentService {
+
+	int register(BCommentVO cvo);
+
+}

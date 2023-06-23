@@ -1,0 +1,28 @@
+package com.myweb.www.config;
+
+
+
+import javax.sql.DataSource;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import com.zaxxer.hikari.HikariConfig;
+
+@Configuration
+@ComponentScan(basePackages = {"com.myweb.www.service"})
+@MapperScan(basePackages = {"com.myweb.www.repository"})
+public class RootContig {
+	
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	public DataSource dataSource() {
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+	}
+
+}

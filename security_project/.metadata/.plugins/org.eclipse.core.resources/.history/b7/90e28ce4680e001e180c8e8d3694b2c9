@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.myweb.www.repository.BCommentDAO">
+    <insert id="postComment">
+    	insert into b_comment (bno, writer, content)
+		values (#{bno}, #{writer}, #{content})
+    </insert>
+    <select id="selectListBComment" resultType="bcvo">
+		select a.cno, writer, content, mod_at
+		from (
+			select cno from b_comment
+			where bno = #{bno}
+			limit #{pgvo.pageStart}, #{pgvo.qty}
+		)a inner join b_comment b 
+		on a.cno = b.cno
+	</select>
+	<select id="selectOneBCommentTotalCount" resultType="int">
+	select count(cno) from b_comment where bvo = #{bno}
+	</select>
+    </mapper>

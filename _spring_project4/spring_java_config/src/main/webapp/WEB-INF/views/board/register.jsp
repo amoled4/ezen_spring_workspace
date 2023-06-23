@@ -9,10 +9,11 @@
 <body>
 
 <form action="/board/register" method="post">
-	title : <input type="text" name="title">
-	writer : <input type="text" name="writer">
-	content : <input type="text" name="content">
+	title : <input type="text" name="title"> <br>
+	writer : <input type="text" name="writer"> <br>
+	content : <input type="text" name="content"> <br>
 	<button>등록</button>
+	<a href="/board/list"><button type="button">취소</button></a>
 </form>
 </body>
 </html>

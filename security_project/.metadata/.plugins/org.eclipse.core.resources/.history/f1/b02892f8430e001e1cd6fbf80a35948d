@@ -1,0 +1,46 @@
+package com.myweb.www.config;
+
+
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+@Configuration
+@ComponentScan(basePackages = {"com.myweb.www.service"})
+@MapperScan(basePackages = {"com.myweb.www.repository"})
+public class RootContig {
+	
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	@Bean
+	public DataSource dataSource() {
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mysql://localhost:3306/springdb");
+		hikariConfig.setUsername("springuser");
+		hikariConfig.setPassword("mysql");
+		hikariConfig.setMinimumIdle(5); //대기시간
+		
+		HikariDataSource hikariDataSource = new HikariDataSource(hikariConfig);
+		return hikariDataSource;
+	}
+	
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() {
+		SqlSessionFactoryBean sqlFactoryBean = new SqlSessionFactoryBean();
+		
+	}
+
+}

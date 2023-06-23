@@ -1,0 +1,36 @@
+package com.myweb.www.service;
+
+import javax.inject.Inject;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.handler.PagingHandler;
+import com.myweb.www.repository.BCommentDAO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class BCommentServiceImpl implements BCommentService{
+
+	@Inject
+	private BCommentDAO cdao;
+
+	@Override
+	public int register(BCommentVO cvo) {
+		// TODO Auto-generated method stub
+		return cdao.postComment(cvo);
+	}
+
+	@Override
+	public PagingHandler getList(long bno, PagingVO pgvo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}

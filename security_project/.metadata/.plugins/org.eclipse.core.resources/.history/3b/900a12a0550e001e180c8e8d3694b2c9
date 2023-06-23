@@ -1,0 +1,15 @@
+package com.myweb.www.domain;
+
+
+public class BoardVO {
+
+	private long bno;
+	private String title;
+	private String content;
+	private String writer;
+	private String regAt;
+	private String modAt;
+	private int readCount;
+	private int cmtQty;
+	private int hasFile;
+}

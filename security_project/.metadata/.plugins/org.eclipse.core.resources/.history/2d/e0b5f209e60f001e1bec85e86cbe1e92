@@ -1,0 +1,53 @@
+package com.myweb.www.controller;
+
+
+import java.security.Principal;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.myweb.www.security.MemberVO;
+import com.myweb.www.service.MemberService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequestMapping("/member/*")
+@Controller
+public class MemberController {
+
+	@Inject
+	private MemberService msv;
+	
+	@Inject
+	private BCryptPasswordEncoder bcpEncoder;
+	
+	@GetMapping("/register")
+	public void register() {}
+	
+	@PostMapping("/register")
+	public String register(MemberVO mvo) {
+		mvo.setPwd(bcpEncoder.encode(mvo.getPwd()));
+		//int isUp = msv.register(mvo);
+		//log.info(">>> isUp {}" + (isUp>0) != null? "Ok" : "fail");
+		return "redirect:"+(msv.register(mvo) > 0 ? "/": "/member/register");
+	}
+	
+	@GetMapping("/login")
+	public void login() {}
+	
+	@PostMapping("/login")
+	public String login(HttpServletRequest req, RedirectAttributes reAttr, Principal p) {
+		log.info("principal"+p);
+		reAttr.addAttribute("email", req.getAttribute("email"));
+		reAttr.addAttribute("errMsg", req.getAttribute("errMsg"));
+		return "redirect:/member/login";
+	}
+}
